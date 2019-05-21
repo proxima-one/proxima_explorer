@@ -52,12 +52,12 @@ class Server extends Component {
   }
 
   componentDidMount() {
-    this.getEthData();
+    this.getRegistryServices();
     document.title = "Proxima Explorer";
 
   }
 
-  getEthData=() => {
+  getRegistryServices=() => {
 
     var self=this;
     
@@ -92,7 +92,7 @@ class Server extends Component {
     self.setState({contractAddress});
   }
 
-  getService=(serviceId) => {
+  getRegistryServiceById=(serviceId) => {
     var self=this;
     document.body.style.cursor='progress';
     self.setState({hasData: false, name: 'Server ' + serviceId})
@@ -146,9 +146,9 @@ class Server extends Component {
 
                 return <GridListTile key={"Server" + serviceId}
                       onClick={() => {
-                        self.getService(serviceId);
+                        self.getRegistryServiceById(serviceId);
                         if (!self.state.dialogOpen)
-                        self.handleClickOpen();
+                          self.handleClickOpen();
                       }}
                     onMouseEnter={() => {
                       document.body.style.cursor='pointer';

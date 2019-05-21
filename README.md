@@ -2,8 +2,6 @@
 
 The explorer is designed to show the services available within the nodes registered in proxima registry. 
 
-[Explorer]()
-
 ## Installation
 
 ```

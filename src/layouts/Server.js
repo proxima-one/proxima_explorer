@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import * as web3Utils from "../util/web3Utils";
+import * as registry from "../util/registry/registryOnChain/registryOnChain";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
@@ -61,11 +61,11 @@ class Server extends Component {
 
     var self=this;
     
-    web3Utils.getServices().then(services => {
+    registry.getServices().then(services => {
       var seen={};
       services.map(serviceId => {
         seen[serviceId]=null;
-        web3Utils.getService(serviceId).then(service => {
+        registry.getService(serviceId).then(service => {
           seen[serviceId]={ service: service[0].toString(),
             name: service[1],
             id: service[2],
@@ -83,7 +83,7 @@ class Server extends Component {
 
     })
 
-    var contractAddress=web3Utils.getContractAddress();
+    var contractAddress=registry.getContractAddress();
     
     self.setState({contractAddress});
   }
@@ -92,7 +92,7 @@ class Server extends Component {
     var self=this;
     document.body.style.cursor='progress';
     self.setState({hasData: false, name: 'Server ' + serviceId})
-    web3Utils.getService(serviceId).then(service => {
+    registry.getService(serviceId).then(service => {
       self.setState({ service: service[0].toString(),
                       name: service[1],
                       id: service[2],
@@ -104,7 +104,7 @@ class Server extends Component {
     }).catch(error => {
       console.log(error);
     })
-    web3Utils.getBootstraps(serviceId).then(bootstraps => {
+    registry.getBootstraps(serviceId).then(bootstraps => {
       var seen={};
       bootstraps.map(bootstrap => {
         seen[bootstrap]=1;

@@ -20,14 +20,6 @@ npm start
 
 Upon deploying the explorer will be deployed to localhost:3000. 
 
-#### Output
- 
-```console
-
-```
-
-The service interface should look like this. 
-
 ## Next Steps
 
 We are looking to integrate a better user interface into our registry, and develop an api that can be used without the registry client.

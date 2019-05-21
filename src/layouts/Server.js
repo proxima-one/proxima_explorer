@@ -63,20 +63,24 @@ class Server extends Component {
     
     registry.getServices().then(services => {
       var seen={};
+      var servers={}
       services.map(serviceId => {
-        seen[serviceId]=null;
-        registry.getService(serviceId).then(service => {
-          seen[serviceId]={ service: service[0].toString(),
-            name: service[1],
-            id: service[2],
-            owner: service[3],
-            stake: service[4].toString(),
-            hasData:true
-          }
-          self.setState({servers:seen});
-        }).catch(error => {
-          seen[serviceId]=null;
-        });
+        if (!(serviceId in seen)) {
+          seen[serviceId]=1;
+          registry.getService(serviceId).then(service => {
+            servers[serviceId]={ service: service[0].toString(),
+              name: service[1],
+              id: service[2],
+              owner: service[3],
+              stake: service[4].toString(),
+              hasData:true
+            }
+            self.setState({servers:servers});
+          
+          }).catch(error => {
+            seen[serviceId]=null;
+          });
+        }
         return serviceId;
       })
       self.setState({table:Object.keys(seen)});

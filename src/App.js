@@ -3,7 +3,7 @@ import './App.css';
 import Nav from "./layouts/Nav"
 import Server from "./layouts/Server"
 import { Route, Switch, Redirect } from "react-router-dom";
-
+import Dialog from './layouts/Dialog'
 
 class App extends Component {
   constructor(props) {
@@ -24,14 +24,16 @@ class App extends Component {
   
   render() {
     return (
-      <Nav>
-        <Switch>
-          <Route exact path="/" component={Server} />
+      <div>
+        <Nav>
+          <Switch>
+            <Route exact path="/" component={Server} />
 
-          <Redirect from="*" to="/" />
-        </Switch>
-      </Nav>
-
+            <Redirect from="*" to="/" />
+          </Switch>
+        </Nav>
+        <Dialog />
+      </div>
 
     );
   }
